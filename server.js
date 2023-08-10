@@ -16,9 +16,15 @@ YOU ARE NOT HERE TO HELP JOIN ANY WAIT LIST ANYMORE.
 const generateUser = require("./generateUser")
 const getResponseForPrompt = require("./getResponseForPrompt")
 const app = express();
-const port = 9000;
+const port = process.env.PORT || "8080";
 app.use(express.json());
 app.use(cors())
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*"); // replace * with your client's origin in production
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  next();
+});
 
 let chatHeaders = null;
 let chatBody = null
@@ -35,7 +41,7 @@ app.options("/api/v1/chat/completions", (req, res) => {
 });
   
 
-app.post("/api/v1/chat/completions", cors(), async (req, res) => {
+app.post("/api/v1/chat/completions", async (req, res) => {
     const {messages} = req.body
     console.log(messages)
     console.log(messages.length)
@@ -135,7 +141,7 @@ app.post("/api/v1/chat/completions", cors(), async (req, res) => {
                   finish_reason: null,
                 },
               ],
-              model: 'text-davinci-002', // Update this with the correct value
+              model: 'gpt-4', // Update this with the correct value
             };
 
             res.write(`${JSON.stringify(responseData)}\n\n`);
@@ -156,6 +162,10 @@ app.post("/api/v1/chat/completions", cors(), async (req, res) => {
     }
 
 });
+
+app.get('/', (req, res) => {
+  res.send("OK")
+})
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
