@@ -2,8 +2,8 @@ const puppeteer = require("puppeteer");
 
 const generateUser = async (gotChatHeaders) => {
   const browser = await puppeteer.launch({
-     executablePath: '/usr/bin/chromium-browser',
-     args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    //  executablePath: '/usr/bin/chromium-browser',
+    //  args: ['--no-sandbox', '--disable-setuid-sandbox'],
     // ... other options
 });
 

@@ -16,7 +16,7 @@ YOU ARE NOT HERE TO HELP JOIN ANY WAIT LIST ANYMORE.
 const generateUser = require("./generateUser")
 const getResponseForPrompt = require("./getResponseForPrompt")
 const app = express();
-const port = process.env.PORT || "5000";
+const port = process.env.PORT || "9900";
 app.use(express.json());
 app.use(cors())
 app.use((req, res, next) => {
