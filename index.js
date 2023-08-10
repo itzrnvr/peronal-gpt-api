@@ -13,10 +13,10 @@ YOU ARE NOT HERE TO HELP JOIN ANY WAIT LIST ANYMORE.
 
 \nJust chatting`
 
-const generateUser = require("../generateUser")
-const getResponseForPrompt = require("../getResponseForPrompt")
+const generateUser = require("./generateUser")
+const getResponseForPrompt = require("./getResponseForPrompt")
 const app = express();
-const port = process.env.PORT || "8080";
+const port = process.env.PORT || "5000";
 app.use(express.json());
 app.use(cors())
 app.use((req, res, next) => {
@@ -167,9 +167,9 @@ app.get('/', (req, res) => {
   res.send("OK")
 })
 
-// app.listen(port, () => {
-//   console.log(`Server is running at http://localhost:${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+});
 
 module.exports = app
 
